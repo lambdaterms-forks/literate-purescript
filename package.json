@@ -1,20 +1,26 @@
 {
-  "name": "literate-purescript",
-  "version": "0.1.0",
-  "description": "literate-style programming for purescript",
+  "name": "paluh-litps",
+  "version": "0.1.4",
+  "description": "Experimental publish of Thimoteus/literate-purescript.",
   "main": "litps",
+  "bin": {
+    "paluh-litps": "index.js"
+  },
   "directories": {
     "test": "test",
     "litps": "litps"
   },
   "scripts": {
-    "build": "pulp build --optimise --to litps",
+    "compile": "pulp build",
+    "prepack": "rimraf output && npm run compile",
+    "build": "npm run -s compile",
+    "start": "node index.js",
     "test": "rm -rf test/ && npm run build && node litps --input litps/ --output test/ --i-ext litps",
     "copybin": "npm run build && chmod +x litps && sed -i -e '1i#!/usr/bin/env node\\' litps && mv litps ~/bin/ && echo 'Success!'"
   },
   "repository": {
     "type": "git",
-    "url": "http://www.github.com/Thimoteus/literate-purescript.git"
+    "url": "http://www.github.com/paluh/literate-purescript.git"
   },
   "keywords": [
     "literate",
@@ -22,5 +28,9 @@
   ],
   "author": "Thimoteus",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "pulp": "^12.3.0",
+    "rimraf": "^2.6.2"
+  }
 }
